@@ -10,6 +10,14 @@ const porta = process.env.PORTA
 
 const filmes = []
 
+app.get("/", (req, res) => {
+    try {
+        res.status(200).json({ mensagem: "API funcionando com sucesso", status: "OK", date: new Date().toLocaleTimeString("pt-BR", { timeZone: "America/Recife" })})
+    } catch (error) {
+        res.status(500).json({ mensagem: "Erro ao inicar API!", erro: error.message });
+    }
+});
+
 app.get("/listar", (req, res) => {
     try {
         if (filmes.length === 0) {
