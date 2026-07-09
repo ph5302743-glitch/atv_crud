@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import router from  "../src/modules/filmes/routes/filme.route.js";
+import router from "../src/modules/filmes/routes/filme.route.js";
 
 dotenv.config();
 const app = express()
@@ -9,7 +9,7 @@ app.use(express.json())
 
 app.use(router)
 
-const porta = process.env.PORTA 
+const porta = process.env.PORTA || 3000
 
 app.get("/", (req, res) => {
     try {

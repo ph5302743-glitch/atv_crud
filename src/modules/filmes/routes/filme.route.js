@@ -1,14 +1,14 @@
-import express from  'express'
+import express from 'express'
 import FilmeController from '../controllers/filme.controller.js'
 
-const router = express.Router("/");
+const router = express.Router();
 
-router.get("/listar", FilmeController.listar)
-router.get("/listar/:codigo", FilmeController.listarporcodigo)
+router.get("/listar", FilmeController.listarTodos)
+router.get("/listar/:codigo", FilmeController.listarPorCodigo)
 router.post("/adicionar", FilmeController.adicionar)
-router.put("/editar/total/:matricula", FilmeController.atualizarTotal)
-router.patch("/listar/parcial/:matricula", FilmeController.atualizarParcial)
+router.put("/editar/:codigo", FilmeController.atualizarTotal)
+router.patch("/editar/parcial/:codigo", FilmeController.atualizarParcial)
+router.delete("/excluir/todos", FilmeController.excluirTodos)
 router.delete("/excluir/:codigo", FilmeController.excluirPorCodigo)
-router.delete("/excluir/:todos", FilmeController.excluirTodos)
 
 export default router

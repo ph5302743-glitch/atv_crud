@@ -1,77 +1,79 @@
 import filmes from "../../../config/database.js"
 
-class FilmeModel{
-    //metodo especial do javascript
-    constructor(codigo, titulo, diretor, genero, anolancamento, duracao, classificacaoindicativa){
-        //inicialização dos parametros
+class FilmeModel {
+    // metodo especial do javascript
+    constructor(codigo, titulo, diretor, genero, anoLancamento, duracao, classificacaoIndicativa) {
         this.codigo = codigo
         this.titulo = titulo
         this.diretor = diretor
         this.genero = genero
-        this.anolacamento = anolancamento
+        this.anoLancamento = anoLancamento
         this.duracao = duracao
-        this.classificacaoindicativa = classificacaoindicativa 
-    };
-    static adicionar(codigo, titulo, diretor, genero, anolancamento, duracao, classificacaoindicativa){
-        const dados = { codigo, titulo, diretor, genero, anolancamento, duracao, classificacaoindicativa }
-        filmes.push(dados)
-    };
-    static listar(){
+        this.classificacaoIndicativa = classificacaoIndicativa
+    }
+
+    static adicionar(codigo, titulo, diretor, genero, anoLancamento, duracao, classificacaoIndicativa) {
+        const filme = new FilmeModel(codigo, titulo, diretor, genero, anoLancamento, duracao, classificacaoIndicativa)
+        filmes.push(filme)
+        return filme
+    }
+
+    static listarTodos() {
         return filmes
-    };
-    static listarporCodigo(codigo){
-        return filmes = filme.find(filme => filme.codigo === codigo)
-    };
-    static editarParcial(novoCodigo, novoTitulo, novoDiretor, novoGenero, novoanoLancamento, novaDuracao, novaclassificacaoindicativa){
+    }
+
+    static listarPorCodigo(codigo) {
+        return filmes.find(filme => filme.codigo === codigo)
+    }
+
+    static editarParcial(codigo, novoTitulo, novoDiretor, novoGenero, novoAnoLancamento, novaDuracao, novaClassificacaoIndicativa) {
         const filme = FilmeModel.listarPorCodigo(codigo)
 
-        if(!filme){
+        if (!filme) {
             return null
         }
-        filme.codigo = novoCodigo || filme.codigo
+
         filme.titulo = novoTitulo || filme.titulo
         filme.diretor = novoDiretor || filme.diretor
         filme.genero = novoGenero || filme.genero
-        filme.anolacamento = novoanoLancamento || filme.anolacamento
+        filme.anoLancamento = novoAnoLancamento || filme.anoLancamento
         filme.duracao = novaDuracao || filme.duracao
-        filme.classificacaoindicativa = novaclassificacaoindicativa || filme.classificacaoindicativa
+        filme.classificacaoIndicativa = novaClassificacaoIndicativa || filme.classificacaoIndicativa
 
         return filme
-
-}    static atualizarTotal(novoCodigo, novoTitulo, novoDiretor, novoGenero, novoanoLancamento, novaDuracao, novaclassificacaoindicativa){
-       const filme = TarefaModel.listarPorCodigo   
-       if(!filme){
-            return null
-       }
-       filme.codigo = novoCodigo 
-        filme.titulo = novoTitulo 
-        filme.diretor = novoDiretor 
-        filme.genero = novoGenero 
-        filme.anolacamento = novoanoLancamento 
-        filme.duracao = novaDuracao 
-        filme.classificacaoindicativa = novaclassificacaoindicativa 
-
-
-       return tarefa
-}
-
-static excluir(codigo){
-    const index = filmes.findIndex(filme => filme.codigo === codigo)
-
-    if(index === -1){
-        return null
     }
 
-    const filmeRemovido = alunos.splice(index, 1)
-    return filmeRemovido[0] 
-}
+    static atualizarTotal(codigo, novoTitulo, novoDiretor, novoGenero, novoAnoLancamento, novaDuracao, novaClassificacaoIndicativa) {
+        const filme = FilmeModel.listarPorCodigo(codigo)
 
-static excluirTodos(){
-    filmes.length = 0
-}
+        if (!filme) {
+            return null
+        }
 
+        filme.titulo = novoTitulo
+        filme.diretor = novoDiretor
+        filme.genero = novoGenero
+        filme.anoLancamento = novoAnoLancamento
+        filme.duracao = novaDuracao
+        filme.classificacaoIndicativa = novaClassificacaoIndicativa
 
+        return filme
+    }
 
+    static excluirPorCodigo(codigo) {
+        const index = filmes.findIndex(filme => filme.codigo === codigo)
+
+        if (index === -1) {
+            return null
+        }
+
+        const filmeRemovido = filmes.splice(index, 1)
+        return filmeRemovido[0]
+    }
+
+    static excluirTodos() {
+        filmes.length = 0
+    }
 }
 
 export default FilmeModel
